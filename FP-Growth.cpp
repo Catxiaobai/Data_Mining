@@ -7,8 +7,8 @@
 
 using namespace std;
 const int min_sup=400;
-int Prin[6]={0,0,0,0,0,0};
-struct HeadNode//±íÍ·Ïî½Úµã
+int Prin[6]={0,0,0,0,0,0};//è®°å½•né¡¹é›†ä¸ªæ•°
+struct HeadNode//è¡¨å¤´é¡¹èŠ‚ç‚¹
 {
     int Id;
     int Co;
@@ -24,11 +24,11 @@ struct HeadNode//±íÍ·Ïî½Úµã
     }
 };
 
-struct FPtreeNode//FP-tree½Úµã
+struct FPtreeNode//FP-treeèŠ‚ç‚¹
 {
     int Id;
     int Co;
-    int Parent;//¸¸½Úµã
+    int Parent;//çˆ¶èŠ‚ç‚¹
     FPtreeNode()
     {
         Id=0;
@@ -47,7 +47,7 @@ int Change(vector<int> v,int a)
     return -1;
 }
 
-int Firitem(vector<int> &v)//Ñ°ÕÒÊı¾İ¼¯ÖĞ×î´óÊı
+int Firitem(vector<int> &v)//å¯»æ‰¾æ•°æ®é›†ä¸­æœ€å¤§æ•°
 {
     ifstream infile("retail.dat");
 	int temp=0;
@@ -60,7 +60,7 @@ int Firitem(vector<int> &v)//Ñ°ÕÒÊı¾İ¼¯ÖĞ×î´óÊı
     return v.size()+5;
 }
 
-int Cin(vector<vector<HeadNode> > &arr,vector<int> &a,vector<int> Fir)//¶ÁÈë¶şÎ¬Êı×é£¬Í¬Ê±¼ÆËãÃ¿Ò»¸öÏî³öÏÖ´ÎÊı
+int Cin(vector<vector<HeadNode> > &arr,vector<int> &a,vector<int> Fir)//è¯»å…¥äºŒç»´æ•°ç»„ï¼ŒåŒæ—¶è®¡ç®—æ¯ä¸€ä¸ªé¡¹å‡ºç°æ¬¡æ•°
 {
     ifstream fin("retail.dat");
     int num;
@@ -79,7 +79,7 @@ int Cin(vector<vector<HeadNode> > &arr,vector<int> &a,vector<int> Fir)//¶ÁÈë¶şÎ¬
 		} while (isspace((int)p) && fin.get(p));
 		if (!fin)
 			break;
-		fin.putback(p);  //½«¶ÁÈ¡µ½µÄÊı¾İ·µ»Øµ½ÊäÈëÁ÷ÖĞ£¬¹©ÏÂÃæµÄfin>>num¿ÉÒÔ¼ÌĞø¶ÁÈ¡Êı¾İ
+		fin.putback(p);  //å°†è¯»å–åˆ°çš„æ•°æ®è¿”å›åˆ°è¾“å…¥æµä¸­ï¼Œä¾›ä¸‹é¢çš„fin>>numå¯ä»¥ç»§ç»­è¯»å–æ•°æ®
 		fin >> num;
 		a[num]++;
 		h.Id=num;
@@ -87,12 +87,12 @@ int Cin(vector<vector<HeadNode> > &arr,vector<int> &a,vector<int> Fir)//¶ÁÈë¶şÎ¬
 		temp_line.push_back(h);
 
 	}
-    cout<<"µÚÒ»´ÎÉ¨ÃèÊı¾İ¿âÍê³É"<<endl;
+    cout<<"ç¬¬ä¸€æ¬¡æ‰«ææ•°æ®åº“å®Œæˆ"<<endl;
 	fin.close();
 	return 0;
 }
 
-int Simplify(vector<vector<HeadNode> > &arr,vector<int> a,vector<int> Fir)//½«·ÇÆµ·±Ò»Ïî¼¯µÄÊıÒÆ³ıÊı¾İ¿â
+int Simplify(vector<vector<HeadNode> > &arr,vector<int> a,vector<int> Fir)//å°†éé¢‘ç¹ä¸€é¡¹é›†çš„æ•°ç§»é™¤æ•°æ®åº“
 {
     vector<vector<HeadNode> > sim;
     vector<HeadNode> temp;
@@ -138,7 +138,7 @@ int Simplify(vector<vector<HeadNode> > &arr,vector<int> a,vector<int> Fir)//½«·Ç
     arr=sim;
     return 0;
 }
-int Simplify(vector<vector<HeadNode> > &arr,vector<int> a)//½«·ÇÆµ·±Ò»Ïî¼¯µÄÊıÒÆ³ıÊı¾İ¿â
+int Simplify(vector<vector<HeadNode> > &arr,vector<int> a)//å°†éé¢‘ç¹ä¸€é¡¹é›†çš„æ•°ç§»é™¤æ•°æ®åº“
 {
     vector<vector<HeadNode> > sim;
     vector<HeadNode> temp;
@@ -183,7 +183,7 @@ int Simplify(vector<vector<HeadNode> > &arr,vector<int> a)//½«·ÇÆµ·±Ò»Ïî¼¯µÄÊıÒÆ
     arr=sim;
     return 0;
 }
-vector<HeadNode> BuildHead(vector<int> a,vector<int> Fir)//×¼±¸
+vector<HeadNode> BuildHead(vector<int> a,vector<int> Fir)//å‡†å¤‡
 {
     vector<HeadNode> Head;
     Head.clear();
@@ -235,10 +235,10 @@ vector<FPtreeNode> CreateTree(vector<vector<HeadNode> > arr,vector<HeadNode> Hea
     vector<vector<int> > Tree(arr.size()*5);
     for (int i=0;i<Tree.size();i++)
     Tree[i].resize(Head.size());
-    int Count=1;//¼ÇÂ¼FPÊ÷µÄ½ÚµãÊ÷
+    int Count=1;//è®°å½•FPæ ‘çš„èŠ‚ç‚¹æ ‘
     for(int i=0;i<arr.size();i++)
     {
-        int u=0;//¸ù½Úµã
+        int u=0;//æ ¹èŠ‚ç‚¹
         //cout<<i<<endl;
         for(int j=0;j<arr[i].size();j++)
         {
@@ -265,7 +265,7 @@ vector<FPtreeNode> CreateTree(vector<vector<HeadNode> > arr,vector<HeadNode> Hea
 void FPGrowth(vector<FPtreeNode> FPTree,HeadNode H,vector<HeadNode> &Result)
 {
     HeadNode t0=HeadNode();
-    vector<vector<HeadNode> > t;//Êı¾İ¿â
+    vector<vector<HeadNode> > t;//æ•°æ®åº“
     vector<HeadNode> t1;
     vector<int> t3;
     for(int i=0;i<FPTree.size();i++)
@@ -364,21 +364,21 @@ int main()
 {
 
     int start=clock();
-    vector<vector<HeadNode> > arr;//Ô­Ê¼Êı¾İ¼¯
+    vector<vector<HeadNode> > arr;//åŸå§‹æ•°æ®é›†
     vector<int> Fir;
-    int Firlen=Firitem(Fir);//Ò»Ïî¼¯¿ÉÄÜµÄÊıÄ¿16469
-    vector<int> a(Firlen);//¼ÇÂ¼Ô­Ê¼Êı¾İ¼¯Ã¿Ò»¸öÏîµÄ³öÏÖ´ÎÊı
+    int Firlen=Firitem(Fir);//ä¸€é¡¹é›†å¯èƒ½çš„æ•°ç›®16469
+    vector<int> a(Firlen);//è®°å½•åŸå§‹æ•°æ®é›†æ¯ä¸€ä¸ªé¡¹çš„å‡ºç°æ¬¡æ•°
     Cin(arr,a,Fir);
     Simplify(arr,a);
-    int Line=arr.size();//sim¼ò»¯Êı¾İ¼¯¹²ÓĞ¶àÉÙÏî,¼´¶àÉÙĞĞ
-    vector<HeadNode> Head=BuildHead(a,Fir);//±íÍ·Ïî
+    int Line=arr.size();//simç®€åŒ–æ•°æ®é›†å…±æœ‰å¤šå°‘é¡¹,å³å¤šå°‘è¡Œ
+    vector<HeadNode> Head=BuildHead(a,Fir);//è¡¨å¤´é¡¹
     int FirItem=Head.size();
     vector<FPtreeNode> FP=CreateTree(arr,Head);
     for(int i=Head.size()-1;i>=0;i--)
     {
         vector<HeadNode> Result;
         Result.clear();
-        cout<<"{"<<Head[i].Id<<"}£º"<<Head[i].Co<<endl;
+        cout<<"{"<<Head[i].Id<<"}ï¼š"<<Head[i].Co<<endl;
         Prin[1]++;
         FPGrowth(FP,Head[i],Result);
     }
@@ -387,14 +387,14 @@ int main()
     for(int i=1;i<6;i++)
     {
         if(Prin[i]>0)
-            cout<<i<<"Ïî¼¯¸öÊı£º"<<Prin[i]<<endl;
+            cout<<i<<"é¡¹é›†ä¸ªæ•°ï¼š"<<Prin[i]<<endl;
     }
     int sum=0;
     for(int i=1;i<6;i++)
     {
         sum+=Prin[i];
     }
-    cout<<"×ÜÊı£º"<<sum<<endl;
-    cout<<"×îĞ¡Ö§³Ö¶ÈÎª£º"<<min_sup<<"Ê±Ñ°ÕÒÆµ·±Ïî¼¯ÓÃÊ±£º"<<double(clock()-start)/CLOCKS_PER_SEC<<endl;
+    cout<<"æ€»æ•°ï¼š"<<sum<<endl;
+    cout<<"æœ€å°æ”¯æŒåº¦ä¸ºï¼š"<<min_sup<<"æ—¶å¯»æ‰¾é¢‘ç¹é¡¹é›†ç”¨æ—¶ï¼š"<<double(clock()-start)/CLOCKS_PER_SEC<<endl;
     return 0;
 }
